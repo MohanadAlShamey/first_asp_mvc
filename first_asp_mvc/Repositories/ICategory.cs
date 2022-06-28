@@ -1,6 +1,6 @@
 ﻿using first_asp_mvc.Models;
 
-namespace first_asp_mvc
+namespace first_asp_mvc.Repositories
 {
     public interface ICategory
     {

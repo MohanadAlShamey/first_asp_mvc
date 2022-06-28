@@ -1,4 +1,3 @@
-using first_asp_mvc;
 using first_asp_mvc.Models;
 using first_asp_mvc.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<DbApplication>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
-builder.Services.AddTransient<ICategory,CategoryRepo>();
+builder.Services.AddTransient<ICategory ,CategoryRepo>();
+builder.Services.AddTransient<IProduct ,ProductRepo>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

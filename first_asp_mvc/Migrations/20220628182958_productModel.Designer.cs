@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using first_asp_mvc.Models;
 
@@ -11,9 +12,10 @@ using first_asp_mvc.Models;
 namespace first_asp_mvc.Migrations
 {
     [DbContext(typeof(DbApplication))]
-    partial class DbApplicationModelSnapshot : ModelSnapshot
+    [Migration("20220628182958_productModel")]
+    partial class productModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,33 +23,6 @@ namespace first_asp_mvc.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("first_asp_mvc.Models.ApplicationProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Products");
-                });
 
             modelBuilder.Entity("first_asp_mvc.Models.CategoryApplication", b =>
                 {
@@ -266,15 +241,6 @@ namespace first_asp_mvc.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("first_asp_mvc.Models.ApplicationProduct", b =>
-                {
-                    b.HasOne("first_asp_mvc.Models.CategoryApplication", "CategoryApplication")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("CategoryApplication");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

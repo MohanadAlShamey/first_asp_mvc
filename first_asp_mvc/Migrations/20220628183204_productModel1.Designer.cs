@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using first_asp_mvc.Models;
 
@@ -11,9 +12,10 @@ using first_asp_mvc.Models;
 namespace first_asp_mvc.Migrations
 {
     [DbContext(typeof(DbApplication))]
-    partial class DbApplicationModelSnapshot : ModelSnapshot
+    [Migration("20220628183204_productModel1")]
+    partial class productModel1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

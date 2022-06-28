@@ -11,5 +11,6 @@ namespace first_asp_mvc.Models
         }
 
         public DbSet<CategoryApplication> Categories { get; set; }
+        public DbSet<ApplicationProduct> Products { get; set; }
     }
 }

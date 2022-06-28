@@ -6,7 +6,7 @@ namespace first_asp_mvc.Repositories
     public class CategoryRepo : ICategory
     {
         private readonly DbApplication _db;
-
+       public string a = "ahmad";
 
         public CategoryRepo(DbApplication db)
         {
@@ -31,12 +31,14 @@ namespace first_asp_mvc.Repositories
 
         public async Task<bool> Edit(CategoryApplication category)
         {
-            CategoryApplication? categoryApplication = await _db.Categories.FindAsync(category.Id);
-            CategoryApplication cat = categoryApplication;
-            _db.Categories.Attach(entity: cat);
-            cat = category;
-           
-            await _db.SaveChangesAsync();
+            CategoryApplication categoryApplication = await _db.Categories.FindAsync(category.Id);
+            _db.Categories.Attach(categoryApplication);
+            //dont work equal
+            categoryApplication.Name = category.Name;
+            categoryApplication.Description = category.Description;
+            categoryApplication.Img = category.Img;
+            /*categoryApplication = category;*/
+             await _db.SaveChangesAsync();
             return true;
         }
 

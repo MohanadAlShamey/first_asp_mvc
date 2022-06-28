@@ -7,16 +7,18 @@ namespace first_asp_mvc.Controllers
 {
     public class CategoryApplicationsController : Controller
     {
-        private readonly CategoryRepo _repo;
+        private readonly ICategory _repo;
 
-        public CategoryApplicationsController(CategoryRepo repo)
+        public CategoryApplicationsController(ICategory repo)
         {
             _repo = repo;
+            
         }
 
         // GET: CategoryApplications
         public async Task<IActionResult> Index()
         {
+            
             IEnumerable<CategoryApplication> categories = await _repo.GetAll();
             ViewData["categories"]= categories;
             return View("~/Views/CategoryApplications/Index.cshtml");
@@ -32,14 +34,14 @@ namespace first_asp_mvc.Controllers
             {
                 return NotFound();
             }
-
-            return View(categoryApplication);
+            ViewData["Category"] = categoryApplication;
+            return View("~/Views/CategoryApplications/Details.cshtml");
         }
 
         // GET: CategoryApplications/Create
         public IActionResult Create()
         {
-            return View();
+            return View("~/Views/CategoryApplications/Create.cshtml");
         }
 
         // POST: CategoryApplications/Create
@@ -77,13 +79,10 @@ namespace first_asp_mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Img")] CategoryApplication categoryApplication)
         {
-            if (id != categoryApplication.Id)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
+                
                 try
                 {
                    await _repo.Edit(categoryApplication);
@@ -97,6 +96,7 @@ namespace first_asp_mvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(categoryApplication);
         }
 
